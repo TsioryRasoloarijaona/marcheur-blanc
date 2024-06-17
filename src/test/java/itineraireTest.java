@@ -34,4 +34,14 @@ public class itineraireTest {
                 itineraire.get(itineraire.size()-1).equals(arrivee));
 
     }
+
+    @Test
+    void test_2_dernier_passage(){
+        var depart = A ;
+        var arrive = C ;
+        var kev = new Marcheur("kev" , depart , arrive);
+        var itineraire = kev.direction(carte);
+        assertTrue(itineraire.get(itineraire.size()-2).equals(B) &&
+                itineraire.get(itineraire.size()-3).equals(A));
+    }
 }
