@@ -1,37 +1,26 @@
 package com.STD22109;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Marcheur {
     private final String nom;
     private Lieux depart;
-    private Lieux arrivee;
+    private final Lieux arrivee;
 
     public Marcheur(String nom, Lieux depart, Lieux arrivee) {
         this.nom = nom;
         this.depart = depart;
         this.arrivee = arrivee;
+
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public Lieux getDepart() {
-        return depart;
-    }
 
     public void setDepart(Lieux depart) {
         this.depart = depart;
     }
 
-    public Lieux getArrivee() {
-        return arrivee;
-    }
 
-    public void setArrivee(Lieux arrivee) {
-        this.arrivee = arrivee;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,27 +45,25 @@ public class Marcheur {
     }
 
     public List<Lieux> direction (Carte carte){
-        List<Lieux> directions = new ArrayList<>();
-        directions.add(depart);
+        Random random = new Random();
+        List<Lieux> trajets = new ArrayList<>();
+        trajets.add(depart);
 
-        while (!depart.equals(arrivee)) {
-            Rue prochains = null;
+        while (!depart.equals(arrivee)){
+            List<Rue> possiblities = carte.possibilite(depart , carte);
+            int indexChoisi = random.nextInt(possiblities.size());
+            Rue rueChoisi = possiblities.get(indexChoisi);
 
-            for (Rue rue : carte.getRues()) {
-                if (depart.equals(rue.getExtremite1())) {
-                    prochains = rue;
-                    setDepart(rue.getExtremite2());
-                    break;
-                } else if (depart.equals(rue.getExtremite2())) {
-                    prochains = rue;
-                    setDepart(rue.getExtremite1());
-                    break;
-                }
+            if (rueChoisi.getExtremite1().equals(depart)){
+                setDepart(rueChoisi.getExtremite2());
+                trajets.add(depart);
+            }else {
+                setDepart(rueChoisi.getExtremite1());
+                trajets.add(depart);
             }
 
-            directions.add(depart);
         }
+        return trajets;
 
-        return directions;
     }
 }

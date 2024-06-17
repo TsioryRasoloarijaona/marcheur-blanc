@@ -32,4 +32,9 @@ public class Carte {
     public int hashCode() {
         return Objects.hashCode(rues);
     }
+
+    public List<Rue> possibilite(Lieux lieux, Carte carte) {
+        return carte.getRues().stream().filter(rue -> rue.getExtremite1().equals(lieux) || rue.getExtremite2().equals(lieux)).toList();
+
+    }
 }

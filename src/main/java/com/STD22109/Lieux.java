@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lieux {
-   private String nom;
+   private final String nom;
 
     public Lieux(String nom) {
         this.nom = nom;
@@ -14,9 +14,6 @@ public class Lieux {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 
     @Override
     public boolean equals(Object o) {
