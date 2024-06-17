@@ -21,7 +21,7 @@ public class Main {
 
 
 
-        Marcheur kev = new Marcheur("kev" , G , C);
+        Marcheur kev = new Marcheur("kev" , A , E);
         System.out.println(kev.direction(carte));
 
 
