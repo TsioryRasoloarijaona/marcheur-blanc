@@ -59,23 +59,22 @@ public class Marcheur {
         List<Lieux> directions = new ArrayList<>();
         directions.add(depart);
 
-        while (!depart.equals(arrivee)){
+        while (!depart.equals(arrivee)) {
             Rue prochains = null;
 
-            for (int i = 0 ; i < carte.getRues().size()-1 ; i++){
-
-                if (depart.getNom().equals(carte.getRues().get(i).getExtremite1())){
-                    prochains = carte.getRues().get(i);
-                    setDepart(prochains.getExtremite1());
-                    directions.add(depart);
+            for (Rue rue : carte.getRues()) {
+                if (depart.equals(rue.getExtremite1())) {
+                    prochains = rue;
+                    setDepart(rue.getExtremite2());
+                    break;
+                } else if (depart.equals(rue.getExtremite2())) {
+                    prochains = rue;
+                    setDepart(rue.getExtremite1());
+                    break;
                 }
-                if (depart.getNom().equals(carte.getRues().get(i).getExtremite2())){
-                    prochains = carte.getRues().get(i);
-                    setDepart(prochains.getExtremite2());
-                    directions.add(depart);
-                }
-
             }
+
+            directions.add(depart);
         }
 
         return directions;
