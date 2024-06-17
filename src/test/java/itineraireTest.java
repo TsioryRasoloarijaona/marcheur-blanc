@@ -57,4 +57,13 @@ public class itineraireTest {
                 itineraire.contains(D) &&
                 itineraire.contains(E));
     }
+
+    @Test
+    void test_possibilite_de_passage(){
+        var depart = A ;
+        var arrive = G;
+        var kev = new Marcheur("kev" , depart , arrive);
+        var itineraire = kev.direction(carte);
+        assertTrue(itineraire.contains(C) || itineraire.contains(F));
+    }
 }
